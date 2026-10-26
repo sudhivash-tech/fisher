@@ -1,0 +1,28 @@
+/* Novigo app views. Uses tokens from style.css. */
+.skip { position: absolute; left: -999px; } .skip:focus { left: 8px; top: 8px; background: var(--surface); padding: .5rem 1rem; z-index: 99; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.app-main { max-width: var(--max-width); margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+.app-main h1:focus { outline: none; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid var(--signal); outline-offset: 2px; }
+.lead { max-width: 65ch; margin-bottom: 1.25rem; } .small { font-size: .88rem; } .err { color: #B3261E; font-weight: 500; margin-top: .5rem; } .warn { color: #8A5A00; }
+[data-theme="dark"] .err { color: #FF8A80; } [data-theme="dark"] .warn { color: var(--amber); }
+.card, .career, .course, .skill { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
+.card h2 { margin-bottom: .75rem; } .career-top { display: flex; justify-content: space-between; gap: 1rem; } .career ul, .card ul, .card ol { margin: .25rem 0 .75rem 1.2rem; list-style: disc; } .card ol { list-style: decimal; }
+.match { font: 600 2rem var(--font-mono); color: var(--signal-dark); white-space: nowrap; } .match small { font-size: .9rem; color: var(--ink-soft); }
+[data-theme="dark"] .match { color: var(--signal); }
+.bar { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; } .bar.big { height: 12px; } .bar span { display: block; height: 100%; background: var(--signal); }
+.meters { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: .75rem 1.5rem; margin-bottom: 1rem; } .meter-row { display: flex; justify-content: space-between; font-size: .92rem; }
+.q { border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem; margin: 0 0 1rem; } .q legend { font-weight: 600; padding: 0 .4rem; max-width: 100%; }
+.q-missing { border-color: #B3261E; } .opt { display: block; padding: .35rem 0; cursor: pointer; } .opt input { margin-right: .5rem; }
+.likert { display: grid; grid-template-columns: repeat(5, 1fr); gap: .4rem; } .likert label { text-align: center; font-size: .8rem; border: 1px solid var(--line); border-radius: 8px; padding: .5rem .2rem; cursor: pointer; }
+.likert label:has(input:checked) { background: var(--signal); color: #fff; border-color: var(--signal); } .likert input { display: block; margin: 0 auto .25rem; }
+.chips { display: flex; flex-wrap: wrap; gap: .25rem 1rem; } .field { display: block; margin: .75rem 0; font-weight: 500; } .field select, .filters input, .filters select { display: block; margin-top: .25rem; padding: .5rem; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); font: inherit; min-width: 220px; }
+.filters { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; } .nav-row { display: flex; justify-content: space-between; gap: .75rem; margin: 1.25rem 0; flex-wrap: wrap; }
+.btn-sm { padding: .4rem .8rem; font-size: .9rem; } .btn[aria-pressed="true"] { background: var(--signal); color: #fff; border-color: var(--signal); }
+.list li { padding: .5rem 0; border-bottom: 1px solid var(--line); } .courses { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; margin-top: 1rem; } .course h4 { margin-bottom: .25rem; }
+.skill summary { cursor: pointer; } .state { text-align: center; padding: 2rem 1rem; color: var(--ink-soft); } .state.error { color: #B3261E; }
+.chat-toggle { position: fixed; right: 1rem; bottom: 1rem; z-index: 40; background: var(--signal-dark); color: #fff; border: 0; border-radius: 99px; padding: .8rem 1.2rem; font-weight: 600; cursor: pointer; }
+.chat-panel { position: fixed; right: 1rem; bottom: 4.5rem; z-index: 40; width: min(380px, calc(100vw - 2rem)); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: .75rem; box-shadow: 0 8px 30px rgba(0,0,0,.18); }
+.chat-panel[hidden] { display: none; } .chat-log { max-height: 45vh; overflow-y: auto; margin-bottom: .5rem; } .msg { margin: .4rem 0; padding: .5rem .7rem; border-radius: 10px; font-size: .92rem; } .msg.user { background: var(--mist); margin-left: 2rem; } .msg.bot { border: 1px solid var(--line); margin-right: 1rem; } .msg a { display: inline-block; margin: .25rem .5rem 0 0; font-size: .85rem; }
+#chat-form { display: flex; gap: .5rem; margin-top: .5rem; } #chat-form input { flex: 1; padding: .5rem; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); }
+@media (max-width: 640px) { .likert { grid-template-columns: 1fr; } .likert label { text-align: left; display: flex; gap: .5rem; align-items: center; } .likert input { margin: 0; } .career-top { flex-direction: column; } }

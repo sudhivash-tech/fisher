@@ -1,0 +1,784 @@
+/* =========================================================
+   Novigo — style.css
+   Design tokens are defined once as CSS custom properties
+   so every component pulls from the same palette/type scale.
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root {
+  /* --- Color tokens --- */
+  --ink:        #12172B;
+  --ink-soft:   #4B5166;
+  --mist:       #EEF1EE;
+  --surface:    #FFFFFF;
+  --line:       #D8DCD6;
+  --signal:     #0F9D74;
+  --signal-dark:#0B7D5C;
+  --amber:      #E8A33D;
+
+  /* --- Type tokens --- */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body:    'IBM Plex Sans', sans-serif;
+  --font-mono:    'IBM Plex Mono', monospace;
+
+  /* --- Layout tokens --- */
+  --max-width: 1120px;
+  --radius: 10px;
+  --gap: 1.5rem;
+}
+
+/* Dark mode: JS toggles data-theme="dark" on <html> */
+[data-theme="dark"] {
+  --ink:        #EDEFEA;
+  --ink-soft:   #A7ADBE;
+  --mist:       #0D1117;
+  --surface:    #171C2C;
+  --line:       #2A3142;
+}
+
+/* =========================================================
+   RESET & BASE
+   ========================================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--mist);
+  color: var(--ink);
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+h1 { font-size: clamp(2.2rem, 4vw, 3.4rem); }
+h2 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); margin-bottom: 1.5rem; }
+h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+
+p { color: var(--ink-soft); }
+
+a {
+  color: var(--signal);
+  text-decoration: none;
+}
+
+ul { list-style: none; }
+
+img { max-width: 100%; display: block; }
+
+/* Visible focus ring for keyboard navigation — accessibility floor */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
+}
+
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+section {
+  padding: 4rem 0;
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn:hover { transform: translateY(-1px); }
+
+.btn-primary {
+  background-color: var(--signal);
+  color: #ffffff;
+}
+.btn-primary:hover { background-color: var(--signal-dark); }
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+}
+.btn-secondary:hover { border-color: var(--ink-soft); }
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--signal);
+  border-color: var(--signal);
+}
+.btn-outline:hover { background-color: var(--signal); color: #fff; }
+
+.btn-large {
+  padding: 0.9rem 1.8rem;
+  font-size: 1.05rem;
+}
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+.navbar {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--ink);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.75rem;
+}
+
+.nav-links a {
+  color: var(--ink-soft);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.nav-links a:hover { color: var(--signal); }
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+#theme-toggle {
+  background: none;
+  border: 1.5px solid var(--line);
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* Hamburger button — hidden on desktop, shown only under 640px */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: 1.5px solid var(--line);
+  border-radius: 6px;
+  width: 38px;
+  height: 38px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero {
+  text-align: center;
+  padding: 5rem 0 4rem;
+}
+
+.hero .highlight { color: var(--signal); }
+
+.hero-subtitle {
+  max-width: 560px;
+  margin: 1.25rem auto 0;
+  font-size: 1.1rem;
+}
+
+.hero-actions {
+  margin-top: 2.25rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* =========================================================
+   HOW IT WORKS — signature pathway motif
+   The dashed line + numbered dots visually plot a route,
+   echoing the site's "career journey" concept.
+   ========================================================= */
+.how-it-works { text-align: center; }
+
+.steps-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap);
+  margin-top: 2rem;
+}
+
+.steps-grid::before {
+  content: "";
+  position: absolute;
+  top: 28px;
+  left: 12%;
+  right: 12%;
+  border-top: 2px dashed var(--line);
+  z-index: 0;
+}
+
+.step-card {
+  position: relative;
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.75rem 1.25rem 1.5rem;
+  text-align: left;
+  z-index: 1;
+}
+
+.step-card::before {
+  content: "";
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--signal);
+  margin-bottom: 1rem;
+}
+
+.step-card h3 { font-size: 1rem; }
+.step-card p { font-size: 0.9rem; }
+
+/* =========================================================
+   WHY SECTION
+   ========================================================= */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+}
+
+.why-card {
+  padding: 1.5rem;
+  border-left: 3px solid var(--signal);
+  background-color: var(--surface);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+/* =========================================================
+   CTA SECTION
+   ========================================================= */
+.cta-section {
+  text-align: center;
+  background-color: var(--ink);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 3.5rem 2rem;
+}
+
+.cta-section h2 { color: #fff; }
+
+/* =========================================================
+   PAGE HEADER (used on about/jobs/skills/etc.)
+   ========================================================= */
+.page-header {
+  text-align: center;
+  padding-bottom: 2rem;
+}
+
+.page-header p {
+  max-width: 520px;
+  margin: 0.75rem auto 0;
+}
+
+/* =========================================================
+   ABOUT PAGE
+   ========================================================= */
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-top: 0;
+}
+
+.about-block {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+
+.checklist li {
+  padding-left: 1.5rem;
+  position: relative;
+  margin-top: 0.5rem;
+  color: var(--ink-soft);
+}
+
+.checklist li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--signal);
+  font-weight: 700;
+}
+
+/* =========================================================
+   FORMS (profile page)
+   ========================================================= */
+.card-form {
+  max-width: 520px;
+  margin: 0 auto;
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.card-form label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+.card-form input,
+.card-form select {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.65rem 0.8rem;
+  border: 1.5px solid var(--line);
+  border-radius: 6px;
+  background-color: var(--mist);
+  color: var(--ink);
+}
+
+.card-form input:focus,
+.card-form select:focus {
+  border-color: var(--signal);
+  outline: none;
+}
+
+.card-form button { margin-top: 1.75rem; }
+
+/* =========================================================
+   PROGRESS BAR — shared by quiz + skill roadmap + dashboard
+   Styled as a "path" being filled in, not a plain bar.
+   ========================================================= */
+.progress-container {
+  width: 100%;
+  height: 10px;
+  background-color: var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 0.75rem 0;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: var(--signal);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+#quiz-progress-label {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-bottom: 2rem;
+}
+
+/* =========================================================
+   QUIZ
+   ========================================================= */
+.quiz-section {
+  max-width: 560px;
+  margin: 0 auto;
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+}
+
+.quiz-section.hidden { display: none; }
+
+fieldset {
+  border: none;
+  margin-bottom: 1.75rem;
+}
+
+legend {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-display);
+}
+
+fieldset label {
+  display: block;
+  padding: 0.5rem 0;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.quiz-section .btn { margin-top: 0.5rem; margin-right: 0.5rem; }
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+}
+
+.dashboard-card {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+}
+
+.stat-large {
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--signal);
+  margin: 0.25rem 0;
+}
+
+.mini-list li {
+  color: var(--ink-soft);
+  padding: 0.15rem 0;
+}
+
+.card-link {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.quick-nav {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 0;
+}
+
+/* =========================================================
+   JOB / SKILL / ACADEMY CARDS
+   ========================================================= */
+.search-bar-section { padding-bottom: 1.5rem; }
+
+.search-bar-section input {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  background-color: var(--surface);
+  color: var(--ink);
+}
+
+.jobs-grid,
+.academies-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gap);
+  padding-top: 1rem;
+}
+
+.job-card,
+.academy-card,
+.skill-card {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+}
+
+.job-demand,
+.academy-rating {
+  font-family: var(--font-mono);
+  color: var(--signal);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.job-salary {
+  font-family: var(--font-mono);
+  color: var(--amber);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.job-skills { font-size: 0.9rem; margin-bottom: 1rem; }
+
+.skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  padding-top: 1rem;
+}
+
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.skill-difficulty {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.2rem 0.7rem;
+}
+
+/* =========================================================
+   PORTFOLIO
+   ========================================================= */
+.portfolio-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+  padding-top: 1rem;
+}
+
+.portfolio-block {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.history-list li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-soft);
+}
+
+/* =========================================================
+   FAQ ACCORDION
+   ========================================================= */
+.faq-list {
+  max-width: 640px;
+  margin: 0 auto;
+  padding-top: 1rem;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--line);
+}
+
+.faq-question {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  padding: 1.25rem 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-question::after {
+  content: "+";
+  font-size: 1.4rem;
+  color: var(--signal);
+  transition: transform 0.2s ease;
+}
+
+.faq-item.open .faq-question::after {
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.faq-item.open .faq-answer {
+  max-height: 200px;
+}
+
+.faq-answer p {
+  padding-bottom: 1.25rem;
+}
+
+/* =========================================================
+   WELCOME POPUP
+   ========================================================= */
+.popup {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(18, 23, 43, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.popup.hidden { display: none; }
+
+.popup-content {
+  background-color: var(--surface);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+}
+
+.popup-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: var(--ink-soft);
+}
+
+.popup-content p { margin: 0.75rem 0 1.5rem; }
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.85rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.data-loading {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  text-align: center;
+  padding: 2rem 0;
+  grid-column: 1 / -1;
+}
+
+/* =========================================================
+   RESPONSIVE — mobile first breakpoints
+   ========================================================= */
+@media (max-width: 900px) {
+  .steps-grid,
+  .why-grid,
+  .dashboard-grid,
+  .jobs-grid,
+  .academies-grid,
+  .portfolio-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .steps-grid::before { display: none; }
+}
+
+@media (max-width: 640px) {
+  .mobile-menu-toggle { display: block; }
+
+  /* Nav links become a dropdown panel, toggled by JS adding .open */
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--line);
+    padding: 0.5rem 1.5rem;
+    display: none;
+  }
+
+  .nav-links.open { display: flex; }
+
+  .nav-links li { width: 100%; }
+
+  .nav-links a {
+    display: block;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-links li:last-child a { border-bottom: none; }
+
+  .navbar { position: relative; }
+
+  .steps-grid,
+  .why-grid,
+  .dashboard-grid,
+  .jobs-grid,
+  .academies-grid,
+  .portfolio-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+  }
+}
+
+/* Respect users who've asked for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

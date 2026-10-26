@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Novigo | Career discovery</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <a class="skip" href="#view">Skip to content</a>
+  <header>
+    <nav class="navbar" aria-label="Main">
+      <a class="logo" href="#/">Novigo</a>
+      <ul class="nav-links">
+        <li><a href="#/">Home</a></li>
+        <li><a href="#/about">About</a></li>
+        <li><a href="#/assess">Assessment</a></li>
+        <li><a href="#/careers">Careers</a></li>
+        <li><a href="#/skills">Skills</a></li>
+        <li><a href="#/courses">Courses</a></li>
+      </ul>
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+        <a class="btn btn-secondary" href="#/profile">Profile</a>
+        <a class="btn btn-primary" href="#/assess">Start assessment</a>
+      </div>
+    </nav>
+  </header>
+  <main id="view" class="app-main"><p class="state">Loading…</p></main>
+  <footer><p>© 2026 Novigo. A career-exploration prototype. Scores are exploratory, not diagnostic.</p></footer>
+
+  <button id="chat-toggle" class="chat-toggle" aria-label="Open career assistant">Ask Novigo</button>
+  <section id="chat-panel" class="chat-panel" aria-label="Career assistant" hidden>
+    <div id="chat-log" class="chat-log" aria-live="polite"></div>
+    <p id="chat-mode" class="small">Dataset answers</p>
+    <label class="small"><input type="checkbox" id="chat-share"> Let the assistant use my assessment results</label>
+    <form id="chat-form"><label class="sr" for="chat-input">Your question</label><input id="chat-input" maxlength="500" autocomplete="off" placeholder="Ask about a career, skill or course"><button class="btn btn-primary btn-sm" type="submit">Send</button></form>
+  </section>
+
+  <script src="js/script.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
